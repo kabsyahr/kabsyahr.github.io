@@ -30,35 +30,56 @@ const EXCLUDED_REPOS = [
 ];
 
 
-// Manual category mapping for known projects.
-// New public repositories can still appear automatically.
+// =============================
+// PROJECT CATEGORY MAP
+// =============================
 
 const PROJECT_CATEGORY_MAP = {
-  "service-reminder-analytics": "business",
-  "customer-retention-prediction": "business",
+
+  "service-reminder-analytics": "analytics",
+
   "customer-review-analytics": "analytics",
-  "financial-buddy-data-warehouse": "engineering",
-  "merdeka-curriculum-sentiment-network-analysis": "ml",
-  "legal-judgment-information-extraction": "ml",
-  "bisindo-sign-language-detection": "cv"
+
+  "financial-buddy-data-warehouse": "analytics",
+
+  "customer-retention-prediction": "mlcv",
+
+  "bisindo-sign-language-detection": "mlcv",
+
+  "merdeka-curriculum-sentiment-network-analysis": "nlp",
+
+  "legal-judgment-information-extraction": "nlp"
+
 };
 
 
-// Friendly category labels
+// =============================
+// CATEGORY LABELS
+// =============================
 
 const CATEGORY_LABELS = {
-  analytics: "Analytics & BI",
-  business: "Business Analytics",
-  ml: "Machine Learning & NLP",
-  engineering: "Data Engineering",
-  cv: "Computer Vision",
-  other: "Data & Technology"
+
+  analytics:
+    "Data Analytics & Business Intelligence",
+
+  mlcv:
+    "Machine Learning & Computer Vision",
+
+  nlp:
+    "Natural Language Processing",
+
+  other:
+    "Data & Technology"
+
 };
 
 
-// Better descriptions for known repositories
+// =============================
+// PROJECT DESCRIPTIONS
+// =============================
 
 const PROJECT_DESCRIPTIONS = {
+
   "service-reminder-analytics":
     "Operational service reminder analytics combining business rules, XGBoost risk scoring, automation, and Power BI.",
 
@@ -79,6 +100,7 @@ const PROJECT_DESCRIPTIONS = {
 
   "bisindo-sign-language-detection":
     "Real-time BISINDO alphabet recognition using MediaPipe Hands, TensorFlow, YOLOv8, and Flask."
+
 };
 
 
@@ -108,25 +130,6 @@ const FALLBACK_PROJECTS = [
 
 
   {
-    name: "customer-retention-prediction",
-
-    description:
-      "Customer retention prediction for automotive aftersales services using Random Forest, XGBoost, CatBoost, and SHAP.",
-
-    html_url:
-      "https://github.com/kabsyahr/customer-retention-prediction",
-
-    language: "Python",
-
-    topics: [
-      "customer-analytics",
-      "machine-learning",
-      "xgboost"
-    ]
-  },
-
-
-  {
     name: "customer-review-analytics",
 
     description:
@@ -139,8 +142,8 @@ const FALLBACK_PROJECTS = [
 
     topics: [
       "power-bi",
-      "nlp",
-      "customer-analytics"
+      "customer-analytics",
+      "dashboard"
     ]
   },
 
@@ -165,39 +168,20 @@ const FALLBACK_PROJECTS = [
 
 
   {
-    name: "merdeka-curriculum-sentiment-network-analysis",
+    name: "customer-retention-prediction",
 
     description:
-      "Sentiment and social network analysis of public discussion about the Merdeka Curriculum on X.",
+      "Customer retention prediction for automotive aftersales services using Random Forest, XGBoost, CatBoost, and SHAP.",
 
     html_url:
-      "https://github.com/kabsyahr/merdeka-curriculum-sentiment-network-analysis",
+      "https://github.com/kabsyahr/customer-retention-prediction",
 
     language: "Python",
 
     topics: [
-      "nlp",
-      "sentiment-analysis",
-      "machine-learning"
-    ]
-  },
-
-
-  {
-    name: "legal-judgment-information-extraction",
-
-    description:
-      "Legal information extraction from Indonesian court decisions using rule-based methods and transformer models.",
-
-    html_url:
-      "https://github.com/kabsyahr/legal-judgment-information-extraction",
-
-    language: "Python",
-
-    topics: [
-      "nlp",
-      "bert",
-      "machine-learning"
+      "machine-learning",
+      "xgboost",
+      "customer-retention"
     ]
   },
 
@@ -216,7 +200,46 @@ const FALLBACK_PROJECTS = [
     topics: [
       "computer-vision",
       "mediapipe",
-      "yolo"
+      "yolo",
+      "tensorflow"
+    ]
+  },
+
+
+  {
+    name: "merdeka-curriculum-sentiment-network-analysis",
+
+    description:
+      "Sentiment and social network analysis of public discussion about the Merdeka Curriculum on X.",
+
+    html_url:
+      "https://github.com/kabsyahr/merdeka-curriculum-sentiment-network-analysis",
+
+    language: "Python",
+
+    topics: [
+      "nlp",
+      "sentiment-analysis",
+      "social-network-analysis"
+    ]
+  },
+
+
+  {
+    name: "legal-judgment-information-extraction",
+
+    description:
+      "Legal information extraction from Indonesian court decisions using rule-based methods and transformer models.",
+
+    html_url:
+      "https://github.com/kabsyahr/legal-judgment-information-extraction",
+
+    language: "Python",
+
+    topics: [
+      "nlp",
+      "bert",
+      "information-extraction"
     ]
   }
 
@@ -244,53 +267,55 @@ function detectCategory(repo) {
     .toLowerCase();
 
 
+  // NATURAL LANGUAGE PROCESSING
+
+  if (
+    combinedText.includes("nlp") ||
+    combinedText.includes("bert") ||
+    combinedText.includes("sentiment") ||
+    combinedText.includes("text-classification") ||
+    combinedText.includes("information-extraction") ||
+    combinedText.includes("language-model") ||
+    combinedText.includes("transformer")
+  ) {
+    return "nlp";
+  }
+
+
+  // MACHINE LEARNING & COMPUTER VISION
+
+  if (
+    combinedText.includes("machine-learning") ||
+    combinedText.includes("deep-learning") ||
+    combinedText.includes("xgboost") ||
+    combinedText.includes("catboost") ||
+    combinedText.includes("random-forest") ||
+    combinedText.includes("tensorflow") ||
+    combinedText.includes("computer-vision") ||
+    combinedText.includes("opencv") ||
+    combinedText.includes("mediapipe") ||
+    combinedText.includes("yolo") ||
+    combinedText.includes("image-classification")
+  ) {
+    return "mlcv";
+  }
+
+
+  // DATA ANALYTICS & BUSINESS INTELLIGENCE
+
   if (
     combinedText.includes("power-bi") ||
     combinedText.includes("dashboard") ||
     combinedText.includes("business-intelligence") ||
-    combinedText.includes("data-analysis")
+    combinedText.includes("data-analysis") ||
+    combinedText.includes("analytics") ||
+    combinedText.includes("business-analytics") ||
+    combinedText.includes("data-warehouse") ||
+    combinedText.includes("etl") ||
+    combinedText.includes("mysql") ||
+    combinedText.includes("reporting")
   ) {
     return "analytics";
-  }
-
-
-  if (
-    combinedText.includes("customer") ||
-    combinedText.includes("business-analytics") ||
-    combinedText.includes("risk")
-  ) {
-    return "business";
-  }
-
-
-  if (
-    combinedText.includes("nlp") ||
-    combinedText.includes("machine-learning") ||
-    combinedText.includes("xgboost") ||
-    combinedText.includes("bert") ||
-    combinedText.includes("sentiment")
-  ) {
-    return "ml";
-  }
-
-
-  if (
-    combinedText.includes("etl") ||
-    combinedText.includes("data-warehouse") ||
-    combinedText.includes("mysql") ||
-    combinedText.includes("data-engineering")
-  ) {
-    return "engineering";
-  }
-
-
-  if (
-    combinedText.includes("computer-vision") ||
-    combinedText.includes("opencv") ||
-    combinedText.includes("mediapipe") ||
-    combinedText.includes("yolo")
-  ) {
-    return "cv";
   }
 
 
@@ -434,8 +459,6 @@ async function loadProjects() {
       })
       .sort((a, b) => {
 
-        // Keep manually mapped portfolio projects higher.
-
         const aKnown =
           PROJECT_CATEGORY_MAP[a.name] ? 1 : 0;
 
@@ -497,9 +520,6 @@ function initializeFilters() {
 
 
   buttons.forEach((button) => {
-
-    // Prevent duplicate listeners if projects
-    // are rendered more than once.
 
     if (button.dataset.initialized === "true") {
       return;
@@ -621,9 +641,6 @@ function openDocumentModal(file, title) {
 
   else {
 
-    // Unsupported file type:
-    // open directly in a new tab.
-
     window.open(
       file,
       "_blank",
@@ -707,8 +724,6 @@ document
 // CLOSE DOCUMENT MODAL
 // =============================
 
-// Close using X button
-
 if (documentModalClose) {
 
   documentModalClose.addEventListener(
@@ -718,8 +733,6 @@ if (documentModalClose) {
 
 }
 
-
-// Close by clicking dark background
 
 if (documentModal) {
 
@@ -736,8 +749,6 @@ if (documentModal) {
 
 }
 
-
-// Close with Escape key
 
 document.addEventListener(
   "keydown",
