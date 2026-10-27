@@ -5,15 +5,17 @@
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 
-menuToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("open");
-});
-
-document.querySelectorAll("#nav-menu a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("open");
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
   });
-});
+
+  document.querySelectorAll("#nav-menu a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+    });
+  });
+}
 
 
 // =============================
@@ -29,50 +31,34 @@ const EXCLUDED_REPOS = [
 
 
 // Manual category mapping for known projects.
-// New repositories can still appear automatically.
+// New public repositories can still appear automatically.
 
 const PROJECT_CATEGORY_MAP = {
-
   "service-reminder-analytics": "business",
-
   "customer-retention-prediction": "business",
-
   "customer-review-analytics": "analytics",
-
   "financial-buddy-data-warehouse": "engineering",
-
   "merdeka-curriculum-sentiment-network-analysis": "ml",
-
   "legal-judgment-information-extraction": "ml",
-
   "bisindo-sign-language-detection": "cv"
-
 };
 
 
 // Friendly category labels
 
 const CATEGORY_LABELS = {
-
   analytics: "Analytics & BI",
-
   business: "Business Analytics",
-
   ml: "Machine Learning & NLP",
-
   engineering: "Data Engineering",
-
   cv: "Computer Vision",
-
   other: "Data & Technology"
-
 };
 
 
 // Better descriptions for known repositories
 
 const PROJECT_DESCRIPTIONS = {
-
   "service-reminder-analytics":
     "Operational service reminder analytics combining business rules, XGBoost risk scoring, automation, and Power BI.",
 
@@ -93,7 +79,6 @@ const PROJECT_DESCRIPTIONS = {
 
   "bisindo-sign-language-detection":
     "Real-time BISINDO alphabet recognition using MediaPipe Hands, TensorFlow, YOLOv8, and Flask."
-
 };
 
 
@@ -173,6 +158,21 @@ function detectCategory(repo) {
 
 
 // =============================
+// FORMAT REPOSITORY NAME
+// =============================
+
+function formatRepoName(name) {
+
+  return name
+    .split("-")
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}
+
+
+// =============================
 // PROJECT CARD
 // =============================
 
@@ -185,11 +185,9 @@ function createProjectCard(repo) {
     repo.description ||
     "Data and technology project available on GitHub.";
 
-
   const language =
     repo.language ||
     "Repository";
-
 
   return `
     <article
@@ -232,22 +230,6 @@ function createProjectCard(repo) {
 
 
 // =============================
-// FORMAT REPOSITORY NAME
-// =============================
-
-function formatRepoName(name) {
-
-  return name
-    .split("-")
-    .map((word) => {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(" ");
-
-}
-
-
-// =============================
 // LOAD REPOSITORIES
 // =============================
 
@@ -256,6 +238,9 @@ async function loadProjects() {
   const container =
     document.getElementById("all-projects-grid");
 
+  if (!container) {
+    return;
+  }
 
   try {
 
@@ -263,14 +248,11 @@ async function loadProjects() {
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`
     );
 
-
     if (!response.ok) {
       throw new Error("GitHub API request failed.");
     }
 
-
     const repos = await response.json();
-
 
     const filteredRepos = repos
       .filter((repo) => {
@@ -284,7 +266,7 @@ async function loadProjects() {
       })
       .sort((a, b) => {
 
-        // Keep known portfolio projects higher.
+        // Keep manually mapped portfolio projects higher.
 
         const aKnown =
           PROJECT_CATEGORY_MAP[a.name] ? 1 : 0;
@@ -292,11 +274,9 @@ async function loadProjects() {
         const bKnown =
           PROJECT_CATEGORY_MAP[b.name] ? 1 : 0;
 
-
         if (aKnown !== bKnown) {
           return bKnown - aKnown;
         }
-
 
         return (
           new Date(b.updated_at) -
@@ -332,7 +312,6 @@ async function loadProjects() {
 
     console.error(error);
 
-
     container.innerHTML = `
       <p class="loading-text">
         Projects could not be loaded automatically.
@@ -340,6 +319,7 @@ async function loadProjects() {
         <a
           href="https://github.com/${GITHUB_USERNAME}"
           target="_blank"
+          rel="noopener noreferrer"
           style="color:#4fd1e5;"
         >
           GitHub profile
@@ -362,7 +342,6 @@ function initializeFilters() {
   const buttons =
     document.querySelectorAll(".filter-btn");
 
-
   buttons.forEach((button) => {
 
     button.addEventListener("click", () => {
@@ -371,17 +350,13 @@ function initializeFilters() {
         btn.classList.remove("active");
       });
 
-
       button.classList.add("active");
-
 
       const filter =
         button.dataset.filter;
 
-
       const cards =
         document.querySelectorAll(".repo-card");
-
 
       cards.forEach((card) => {
 
@@ -389,15 +364,11 @@ function initializeFilters() {
           filter === "all" ||
           card.dataset.category === filter
         ) {
-
           card.style.display = "flex";
-
         }
 
         else {
-
           card.style.display = "none";
-
         }
 
       });
@@ -407,6 +378,198 @@ function initializeFilters() {
   });
 
 }
+
+
+// =============================
+// UNIVERSAL DOCUMENT MODAL
+// =============================
+
+const documentModal =
+  document.getElementById("document-modal");
+
+const documentPdfViewer =
+  document.getElementById("document-pdf-viewer");
+
+const documentImageViewer =
+  document.getElementById("document-image-viewer");
+
+const documentModalTitle =
+  document.getElementById("document-modal-title");
+
+const documentModalClose =
+  document.getElementById("document-modal-close");
+
+
+function openDocumentModal(file, title) {
+
+  if (
+    !documentModal ||
+    !documentPdfViewer ||
+    !documentImageViewer ||
+    !documentModalTitle
+  ) {
+    return;
+  }
+
+  const cleanFile =
+    file.split("?")[0];
+
+  const extension =
+    cleanFile
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+  documentPdfViewer.style.display = "none";
+  documentImageViewer.style.display = "none";
+
+  documentPdfViewer.src = "";
+  documentImageViewer.src = "";
+
+
+  if (extension === "pdf") {
+
+    documentPdfViewer.src = file;
+    documentPdfViewer.style.display = "block";
+
+  }
+
+  else if (
+    extension === "png" ||
+    extension === "jpg" ||
+    extension === "jpeg" ||
+    extension === "webp" ||
+    extension === "gif"
+  ) {
+
+    documentImageViewer.src = file;
+    documentImageViewer.style.display = "block";
+
+  }
+
+  else {
+
+    // Fallback: try opening unsupported file types
+    // directly in a new browser tab.
+
+    window.open(
+      file,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    return;
+  }
+
+
+  documentModalTitle.textContent =
+    title || "Document Preview";
+
+  documentModal.classList.add("open");
+
+  document.body.style.overflow = "hidden";
+}
+
+
+function closeDocumentModal() {
+
+  if (
+    !documentModal ||
+    !documentPdfViewer ||
+    !documentImageViewer
+  ) {
+    return;
+  }
+
+  documentModal.classList.remove("open");
+
+  documentPdfViewer.src = "";
+  documentImageViewer.src = "";
+
+  documentPdfViewer.style.display = "none";
+  documentImageViewer.style.display = "none";
+
+  document.body.style.overflow = "";
+}
+
+
+// =============================
+// DOCUMENT BUTTONS
+// =============================
+
+document
+  .querySelectorAll(".document-link")
+  .forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+      const file =
+        button.dataset.file;
+
+      const title =
+        button.dataset.title;
+
+      if (!file) {
+        return;
+      }
+
+      openDocumentModal(
+        file,
+        title
+      );
+
+    });
+
+  });
+
+
+// Close using X button
+
+if (documentModalClose) {
+
+  documentModalClose.addEventListener(
+    "click",
+    closeDocumentModal
+  );
+
+}
+
+
+// Close by clicking dark background
+
+if (documentModal) {
+
+  documentModal.addEventListener(
+    "click",
+    (event) => {
+
+      if (event.target === documentModal) {
+        closeDocumentModal();
+      }
+
+    }
+  );
+
+}
+
+
+// Close with Escape key
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (
+      event.key === "Escape" &&
+      documentModal &&
+      documentModal.classList.contains("open")
+    ) {
+      closeDocumentModal();
+    }
+
+  }
+);
 
 
 // =============================

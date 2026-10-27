@@ -22,7 +22,7 @@
 
   --border: rgba(255, 255, 255, 0.09);
 
-  --max-width: 1160px;
+  --max-width: 1220px;
 }
 
 html {
@@ -64,7 +64,7 @@ button {
 ========================= */
 
 .container {
-  width: min(var(--max-width), 90%);
+  width: min(var(--max-width), 92%);
   margin: 0 auto;
 }
 
@@ -80,7 +80,7 @@ button {
 }
 
 .section-heading {
-  max-width: 760px;
+  max-width: 820px;
   margin-bottom: 54px;
 }
 
@@ -118,7 +118,7 @@ button {
 
   color: #647084;
 
-  max-width: 680px;
+  max-width: 720px;
 
   font-size: 1.05rem;
 }
@@ -220,15 +220,15 @@ nav a:hover {
 
   display: grid;
 
-  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
 
-  gap: 80px;
+  gap: 64px;
 
   align-items: center;
 }
 
 .hero-content {
-  max-width: 820px;
+  max-width: 860px;
 }
 
 .eyebrow {
@@ -261,7 +261,7 @@ nav a:hover {
 .hero-description {
   margin-top: 30px;
 
-  max-width: 720px;
+  max-width: 760px;
 
   color: #a7b3c3;
 
@@ -316,7 +316,8 @@ nav a:hover {
 
   transition:
     transform 0.2s,
-    background 0.2s;
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .btn:hover {
@@ -343,7 +344,7 @@ nav a:hover {
 /* HERO PANEL */
 
 .hero-panel {
-  padding: 32px;
+  padding: 36px;
 
   background:
     linear-gradient(
@@ -355,6 +356,12 @@ nav a:hover {
   border: 1px solid var(--border);
 
   border-radius: 18px;
+
+  min-height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .panel-label {
@@ -371,7 +378,7 @@ nav a:hover {
 
   color: var(--white);
 
-  font-size: 1.3rem;
+  font-size: 1.45rem;
 
   line-height: 1.4;
 }
@@ -387,7 +394,7 @@ nav a:hover {
 
   align-items: center;
 
-  padding: 15px 0;
+  padding: 17px 0;
 
   border-top: 1px solid var(--border);
 }
@@ -401,7 +408,7 @@ nav a:hover {
 .focus-list p {
   color: #b3becc;
 
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 
@@ -442,9 +449,9 @@ nav a:hover {
 .about-grid {
   display: grid;
 
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
 
-  gap: 80px;
+  gap: 72px;
 }
 
 .about-main p {
@@ -454,7 +461,7 @@ nav a:hover {
 
   margin-bottom: 20px;
 
-  max-width: 720px;
+  max-width: 760px;
 }
 
 .about-side {
@@ -462,7 +469,7 @@ nav a:hover {
 }
 
 .about-item {
-  padding: 18px 0;
+  padding: 20px 0;
 
   border-bottom: 1px solid #dce2e9;
 }
@@ -480,26 +487,26 @@ nav a:hover {
 }
 
 .about-item strong {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 
 /* =========================
-   IMPACT
+   PROFILE / IMPACT
 ========================= */
 
 .impact-grid {
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   gap: 16px;
 }
 
 .impact-card {
-  min-height: 160px;
+  min-height: 170px;
 
-  padding: 26px;
+  padding: 28px;
 
   border: 1px solid var(--border);
 
@@ -511,12 +518,22 @@ nav a:hover {
   flex-direction: column;
 
   justify-content: space-between;
+
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+}
+
+.impact-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(79, 209, 229, 0.28);
 }
 
 .impact-card strong {
   color: var(--cyan);
 
-  font-size: 2.5rem;
+  font-size: 2.7rem;
 
   letter-spacing: -0.05em;
 }
@@ -524,7 +541,7 @@ nav a:hover {
 .impact-card p {
   color: #9eabbc;
 
-  font-size: 0.88rem;
+  font-size: 0.92rem;
 }
 
 
@@ -724,6 +741,16 @@ nav a:hover {
 
   display: flex;
   flex-direction: column;
+
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+}
+
+.repo-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(79, 209, 229, 0.25);
 }
 
 .repo-category {
@@ -833,12 +860,12 @@ nav a:hover {
   font-weight: 500;
 }
 
-.timeline-content > p:last-child {
+.timeline-content > p:last-of-type {
   margin-top: 14px;
 
   color: #657184;
 
-  max-width: 720px;
+  max-width: 760px;
 }
 
 
@@ -988,7 +1015,10 @@ nav a:hover {
 
   background: var(--bg-soft);
 
-  min-height: 190px;
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .credential-card > p {
@@ -1020,6 +1050,164 @@ nav a:hover {
 
 
 /* =========================
+   DOCUMENT LINKS
+========================= */
+
+.document-link {
+  margin-top: 20px;
+
+  padding: 0;
+
+  border: none;
+  background: none;
+
+  color: #168ca1;
+
+  font-weight: 700;
+  font-size: 0.86rem;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  align-self: flex-start;
+
+  transition: color 0.2s;
+}
+
+.section-dark .document-link {
+  color: var(--cyan);
+}
+
+.document-link:hover {
+  color: #0c6f80;
+
+  text-decoration: underline;
+}
+
+.section-dark .document-link:hover {
+  color: var(--cyan-soft);
+}
+
+
+/* =========================
+   DOCUMENT MODAL
+========================= */
+
+.document-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 20000;
+
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 28px;
+
+  background: rgba(2, 8, 15, 0.94);
+
+  backdrop-filter: blur(8px);
+}
+
+.document-modal.open {
+  display: flex;
+}
+
+.document-modal-content {
+  width: min(1000px, 92vw);
+  height: min(850px, 88vh);
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+}
+
+.document-viewer {
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: white;
+}
+
+.document-image {
+  display: none;
+
+  max-width: 100%;
+  max-height: 80vh;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+#document-modal-title {
+  color: #d7e0ea;
+
+  font-size: 0.9rem;
+
+  text-align: center;
+}
+
+.modal-close {
+  position: fixed;
+
+  top: 24px;
+  right: 28px;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: white;
+
+  font-size: 2rem;
+
+  cursor: pointer;
+
+  z-index: 20001;
+
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+
+.modal-close:hover {
+  border-color: var(--cyan);
+
+  color: var(--cyan);
+
+  background: rgba(79, 209, 229, 0.06);
+}
+
+
+/* =========================
    CONTACT
 ========================= */
 
@@ -1035,7 +1223,7 @@ nav a:hover {
 }
 
 .contact-content {
-  max-width: 780px;
+  max-width: 820px;
 
   text-align: center;
 }
@@ -1113,7 +1301,8 @@ footer {
   }
 
   .hero-panel {
-    max-width: 650px;
+    max-width: none;
+    min-height: auto;
   }
 
   .about-grid {
@@ -1140,6 +1329,7 @@ footer {
 
   .featured-image img {
     height: auto;
+
     max-height: 420px;
   }
 
@@ -1224,9 +1414,9 @@ footer {
   }
 
   .impact-card {
-    min-height: 135px;
+    min-height: 140px;
 
-    padding: 18px;
+    padding: 20px;
   }
 
   .impact-card strong {
@@ -1266,6 +1456,22 @@ footer {
 
   .publication-card {
     grid-column: span 1;
+  }
+
+
+  .document-modal {
+    padding: 70px 12px 20px;
+  }
+
+  .document-modal-content {
+    width: 100%;
+
+    height: 82vh;
+  }
+
+  .modal-close {
+    top: 14px;
+    right: 14px;
   }
 
 
