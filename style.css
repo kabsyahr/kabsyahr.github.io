@@ -173,13 +173,26 @@ nav a:hover {
 .project-card {
   border: 1px solid #e1e5eb;
   border-radius: 14px;
-  padding: 28px;
+  overflow: hidden;
+  background: #ffffff;
   transition: 0.2s ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+}
+
+.project-image {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #e1e5eb;
+}
+
+.project-content {
+  padding: 28px;
 }
 
 .project-card h3 {
@@ -243,6 +256,7 @@ nav a:hover {
   display: flex;
   gap: 22px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .contact-links a {
@@ -273,5 +287,9 @@ footer {
 
   .hero h1 {
     font-size: 3.2rem;
+  }
+
+  .project-image {
+    height: 210px;
   }
 }
