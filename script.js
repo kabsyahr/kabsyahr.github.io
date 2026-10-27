@@ -83,6 +83,147 @@ const PROJECT_DESCRIPTIONS = {
 
 
 // =============================
+// FALLBACK PROJECTS
+// =============================
+
+const FALLBACK_PROJECTS = [
+
+  {
+    name: "service-reminder-analytics",
+
+    description:
+      "Operational service reminder analytics combining business rules, XGBoost risk scoring, automation, and Power BI.",
+
+    html_url:
+      "https://github.com/kabsyahr/service-reminder-analytics",
+
+    language: "Python",
+
+    topics: [
+      "business-analytics",
+      "power-bi",
+      "xgboost"
+    ]
+  },
+
+
+  {
+    name: "customer-retention-prediction",
+
+    description:
+      "Customer retention prediction for automotive aftersales services using Random Forest, XGBoost, CatBoost, and SHAP.",
+
+    html_url:
+      "https://github.com/kabsyahr/customer-retention-prediction",
+
+    language: "Python",
+
+    topics: [
+      "customer-analytics",
+      "machine-learning",
+      "xgboost"
+    ]
+  },
+
+
+  {
+    name: "customer-review-analytics",
+
+    description:
+      "Automated customer review analytics using sentiment analysis, service classification, multi-aspect analysis, and Power BI.",
+
+    html_url:
+      "https://github.com/kabsyahr/customer-review-analytics",
+
+    language: "Python",
+
+    topics: [
+      "power-bi",
+      "nlp",
+      "customer-analytics"
+    ]
+  },
+
+
+  {
+    name: "financial-buddy-data-warehouse",
+
+    description:
+      "Financial data warehouse and analytics project using MySQL, Pentaho ETL, dimensional modeling, and reporting.",
+
+    html_url:
+      "https://github.com/kabsyahr/financial-buddy-data-warehouse",
+
+    language: "SQL",
+
+    topics: [
+      "data-warehouse",
+      "etl",
+      "mysql"
+    ]
+  },
+
+
+  {
+    name: "merdeka-curriculum-sentiment-network-analysis",
+
+    description:
+      "Sentiment and social network analysis of public discussion about the Merdeka Curriculum on X.",
+
+    html_url:
+      "https://github.com/kabsyahr/merdeka-curriculum-sentiment-network-analysis",
+
+    language: "Python",
+
+    topics: [
+      "nlp",
+      "sentiment-analysis",
+      "machine-learning"
+    ]
+  },
+
+
+  {
+    name: "legal-judgment-information-extraction",
+
+    description:
+      "Legal information extraction from Indonesian court decisions using rule-based methods and transformer models.",
+
+    html_url:
+      "https://github.com/kabsyahr/legal-judgment-information-extraction",
+
+    language: "Python",
+
+    topics: [
+      "nlp",
+      "bert",
+      "machine-learning"
+    ]
+  },
+
+
+  {
+    name: "bisindo-sign-language-detection",
+
+    description:
+      "Real-time BISINDO alphabet recognition using MediaPipe Hands, TensorFlow, YOLOv8, and Flask.",
+
+    html_url:
+      "https://github.com/kabsyahr/bisindo-sign-language-detection",
+
+    language: "Python",
+
+    topics: [
+      "computer-vision",
+      "mediapipe",
+      "yolo"
+    ]
+  }
+
+];
+
+
+// =============================
 // AUTO CATEGORY DETECTION
 // =============================
 
@@ -230,6 +371,28 @@ function createProjectCard(repo) {
 
 
 // =============================
+// RENDER PROJECTS
+// =============================
+
+function renderProjects(projects) {
+
+  const container =
+    document.getElementById("all-projects-grid");
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML =
+    projects
+      .map(createProjectCard)
+      .join("");
+
+  initializeFilters();
+}
+
+
+// =============================
 // LOAD REPOSITORIES
 // =============================
 
@@ -248,11 +411,16 @@ async function loadProjects() {
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`
     );
 
+
     if (!response.ok) {
-      throw new Error("GitHub API request failed.");
+      throw new Error(
+        `GitHub API request failed with status ${response.status}.`
+      );
     }
 
+
     const repos = await response.json();
+
 
     const filteredRepos = repos
       .filter((repo) => {
@@ -274,9 +442,11 @@ async function loadProjects() {
         const bKnown =
           PROJECT_CATEGORY_MAP[b.name] ? 1 : 0;
 
+
         if (aKnown !== bKnown) {
           return bKnown - aKnown;
         }
+
 
         return (
           new Date(b.updated_at) -
@@ -288,45 +458,28 @@ async function loadProjects() {
 
     if (filteredRepos.length === 0) {
 
-      container.innerHTML = `
-        <p class="loading-text">
-          No public projects found.
-        </p>
-      `;
+      console.warn(
+        "GitHub returned no public projects. Using fallback projects."
+      );
+
+      renderProjects(FALLBACK_PROJECTS);
 
       return;
     }
 
 
-    container.innerHTML =
-      filteredRepos
-        .map(createProjectCard)
-        .join("");
-
-
-    initializeFilters();
+    renderProjects(filteredRepos);
 
   }
 
   catch (error) {
 
-    console.error(error);
+    console.error(
+      "GitHub API failed. Showing fallback projects.",
+      error
+    );
 
-    container.innerHTML = `
-      <p class="loading-text">
-        Projects could not be loaded automatically.
-        Visit my
-        <a
-          href="https://github.com/${GITHUB_USERNAME}"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="color:#4fd1e5;"
-        >
-          GitHub profile
-        </a>
-        to explore my repositories.
-      </p>
-    `;
+    renderProjects(FALLBACK_PROJECTS);
 
   }
 
@@ -342,7 +495,18 @@ function initializeFilters() {
   const buttons =
     document.querySelectorAll(".filter-btn");
 
+
   buttons.forEach((button) => {
+
+    // Prevent duplicate listeners if projects
+    // are rendered more than once.
+
+    if (button.dataset.initialized === "true") {
+      return;
+    }
+
+    button.dataset.initialized = "true";
+
 
     button.addEventListener("click", () => {
 
@@ -350,13 +514,17 @@ function initializeFilters() {
         btn.classList.remove("active");
       });
 
+
       button.classList.add("active");
+
 
       const filter =
         button.dataset.filter;
 
+
       const cards =
         document.querySelectorAll(".repo-card");
+
 
       cards.forEach((card) => {
 
@@ -411,6 +579,7 @@ function openDocumentModal(file, title) {
     return;
   }
 
+
   const cleanFile =
     file.split("?")[0];
 
@@ -431,6 +600,7 @@ function openDocumentModal(file, title) {
   if (extension === "pdf") {
 
     documentPdfViewer.src = file;
+
     documentPdfViewer.style.display = "block";
 
   }
@@ -444,14 +614,15 @@ function openDocumentModal(file, title) {
   ) {
 
     documentImageViewer.src = file;
+
     documentImageViewer.style.display = "block";
 
   }
 
   else {
 
-    // Fallback: try opening unsupported file types
-    // directly in a new browser tab.
+    // Unsupported file type:
+    // open directly in a new tab.
 
     window.open(
       file,
@@ -466,7 +637,9 @@ function openDocumentModal(file, title) {
   documentModalTitle.textContent =
     title || "Document Preview";
 
+
   documentModal.classList.add("open");
+
 
   document.body.style.overflow = "hidden";
 }
@@ -482,13 +655,17 @@ function closeDocumentModal() {
     return;
   }
 
+
   documentModal.classList.remove("open");
+
 
   documentPdfViewer.src = "";
   documentImageViewer.src = "";
 
+
   documentPdfViewer.style.display = "none";
   documentImageViewer.style.display = "none";
+
 
   document.body.style.overflow = "";
 }
@@ -510,9 +687,11 @@ document
       const title =
         button.dataset.title;
 
+
       if (!file) {
         return;
       }
+
 
       openDocumentModal(
         file,
@@ -523,6 +702,10 @@ document
 
   });
 
+
+// =============================
+// CLOSE DOCUMENT MODAL
+// =============================
 
 // Close using X button
 
