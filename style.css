@@ -403,7 +403,7 @@ nav a:hover {
 
 .impact-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -1242,7 +1242,7 @@ footer {
   }
 
   .impact-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .featured-project,
@@ -1340,7 +1340,7 @@ footer {
   }
 
   .impact-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
@@ -1475,7 +1475,15 @@ footer {
   }
 
   .impact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .impact-card {
+    padding: 14px;
+  }
+
+  .impact-card strong {
+    font-size: 1.85rem;
   }
 
   .hero-buttons .btn {

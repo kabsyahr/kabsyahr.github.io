@@ -349,6 +349,17 @@ function renderProjects(projects) {
 
   container.innerHTML = projects.map(createProjectCard).join("");
 
+  // Automatically update the Portfolio Projects count.
+  // The total follows the projects displayed in All Projects.
+  // Category filters do not change this number.
+  const projectCount = document.getElementById(
+    "portfolio-project-count"
+  );
+
+  if (projectCount) {
+    projectCount.textContent = String(projects.length);
+  }
+
   applyProjectFilter();
 }
 
