@@ -48,7 +48,9 @@ const PROJECT_CATEGORY_MAP = {
 
   "merdeka-curriculum-sentiment-network-analysis": "nlp",
 
-  "legal-judgment-information-extraction": "nlp"
+  "legal-judgment-information-extraction": "nlp",
+
+  "generative-ai-media-framing-analysis": "nlp"
 
 };
 
