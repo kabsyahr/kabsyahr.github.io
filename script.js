@@ -80,7 +80,7 @@ const PROJECT_DESCRIPTIONS = {
     "Customer retention prediction for automotive aftersales services using Random Forest, XGBoost, CatBoost, and SHAP.",
 
   "customer-review-analytics":
-    "Automated customer review analytics using sentiment analysis, service classification, multi-aspect analysis, and Power BI.",
+    "Customer feedback analytics for aftersales monitoring: Google Reviews sentiment, service-category and multi-aspect classification, and interactive Power BI reporting.",
 
   "financial-buddy-data-warehouse":
     "Financial data warehouse and analytics project using MySQL, Pentaho ETL, dimensional modeling, and reporting.",
