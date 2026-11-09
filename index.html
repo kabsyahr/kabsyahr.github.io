@@ -348,55 +348,52 @@
           </div>
         </article>
 
-        <!-- PROJECT 2 -->
+        <!-- PROJECT 2: CUSTOMER RETENTION PREDICTION (UNDERGRADUATE THESIS) -->
         <article class="featured-project reverse">
-
-          <div class="featured-image">
-            <img
-              src="assets/projects/customer-retention-prediction.png"
-              alt="Customer Retention Prediction model comparison"
-            />
+          <div class="featured-image reminder-gallery retention-gallery" aria-label="Customer Retention Prediction thesis result charts">
+            <button type="button" class="document-link reminder-preview" data-file="assets/projects/retention-model-comparison-2026.png" data-title="Customer Retention Prediction — Test Performance by Retention Window" aria-label="Enlarge customer retention test performance comparison">
+              <img src="assets/projects/retention-model-comparison-2026.png" alt="Held-out test accuracy, F1-score, and ROC-AUC comparing XGBoost at 180 days, CatBoost at end-of-month, and XGBoost at 210 days" loading="lazy" />
+              <span class="reminder-preview-label">View Model Comparison ↗</span>
+            </button>
+            <button type="button" class="document-link reminder-preview" data-file="assets/projects/retention-confusion-matrix-2026.png" data-title="Customer Retention Prediction — XGBoost 210-Day Confusion Matrix" aria-label="Enlarge XGBoost 210-day confusion matrix">
+              <img src="assets/projects/retention-confusion-matrix-2026.png" alt="Confusion matrix for the 210-day XGBoost test: 980 true negatives, 923 false positives, 593 false negatives, 2337 true positives" loading="lazy" />
+              <span class="reminder-preview-label">View Prediction Errors ↗</span>
+            </button>
           </div>
-
           <div class="featured-content">
-
-            <p class="project-category">
-              MACHINE LEARNING · CUSTOMER ANALYTICS
-            </p>
-
+            <p class="project-category">MACHINE LEARNING · CUSTOMER ANALYTICS</p>
             <h3>Customer Retention Prediction</h3>
-
             <p>
-              Undergraduate thesis project predicting
-              customer retention in automotive aftersales
-              services using Random Forest, XGBoost, CatBoost,
-              feature engineering, feature selection, and SHAP.
+              Undergraduate thesis at Auto2000 Kenjeran exploring whether historical
+              workshop service transactions can predict a vehicle's return for aftersales
+              service. Analyzed 26 monthly PKB sheets and compared three retention
+              definitions (180 days, end-of-month, and 210 days) using Random Forest,
+              XGBoost, and CatBoost with historical behavioral features.
             </p>
-
             <div class="project-highlight">
-              <strong>Best Model</strong>
-
-              <span>
-                XGBoost · F1 0.7551 · ROC-AUC 0.7272
-              </span>
+              <strong>Best Reported Test Results · XGBoost, 210-Day Definition</strong>
+              <span>Accuracy 68.63% · F1-score 0.7551 · ROC-AUC 0.7272 · Log loss 0.5898</span>
             </div>
-
+            <p class="retention-finding">
+              <strong>Analytical finding:</strong> The retained share was 49.73% under the
+              180-day definition versus 60.63% under 210 days, showing how the chosen
+              monitoring window changes classification. The windows also use different
+              eligible samples, so these percentages are not a measured retention increase.
+            </p>
+            <p class="reminder-recommendation">
+              <strong>Proposed action:</strong> Explore monitoring late-returning vehicles
+              during days 181–210 alongside the existing 180-day service reference, and
+              validate predictions against actual follow-up and service outcomes.
+            </p>
+            <p class="reminder-disclaimer">
+              Thesis evaluation only; model results do not establish an operational
+              improvement in customer retention or change official T-Care eligibility.
+              The charts are recreated from reported thesis test metrics.
+            </p>
             <div class="tags">
-              <span>Python</span>
-              <span>XGBoost</span>
-              <span>CatBoost</span>
-              <span>SHAP</span>
+              <span>Python</span><span>XGBoost</span><span>CatBoost</span><span>SHAP</span><span>Optuna</span>
             </div>
-
-            <a
-              href="https://github.com/kabsyahr/customer-retention-prediction"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="project-link"
-            >
-              View Repository →
-            </a>
-
+            <a href="https://github.com/kabsyahr/customer-retention-prediction" target="_blank" rel="noopener noreferrer" class="project-link">View Repository →</a>
           </div>
         </article>
 

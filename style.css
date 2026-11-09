@@ -1597,3 +1597,8 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .reminder-gallery .reminder-preview img { transition: none; }
 }
+
+/* Retention thesis gallery follows the existing Service Reminder lightbox system. */
+.retention-gallery .reminder-preview img { max-height: 245px; object-fit: contain; }
+.featured-content .retention-finding { margin-top: 15px; color: #627084; }
+@media (max-width: 650px) { .retention-gallery .reminder-preview img { max-height: 215px; } }

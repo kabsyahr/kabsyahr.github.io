@@ -77,7 +77,7 @@ const PROJECT_DESCRIPTIONS = {
     "Auto2000 aftersales reminder analysis: PKB/SO integration, T-Care scheduling, 751 follow-up targets, delivery/contact verification, and Power BI actions.",
 
   "customer-retention-prediction":
-    "Customer retention prediction for automotive aftersales services using Random Forest, XGBoost, CatBoost, and SHAP.",
+    "Automotive aftersales thesis: 180-day, end-of-month and 210-day retention definitions; XGBoost 210-day test F1 0.7551 and ROC-AUC 0.7272.",
 
   "customer-review-analytics":
     "Customer feedback analytics for aftersales monitoring: Google Reviews sentiment, service-category and multi-aspect classification, and interactive Power BI reporting.",
@@ -292,7 +292,9 @@ function createProjectCard(repo) {
   // Display a project-relevant technology summary instead of GitHub's single-language classification.
   const language = repo.name === "service-reminder-analytics"
     ? "Python · Power BI · Business Rules"
-    : (repo.language || "Repository");
+    : repo.name === "customer-retention-prediction"
+      ? "Python · XGBoost · SHAP"
+      : (repo.language || "Repository");
 
   const repositoryURL =
     typeof repo.html_url === "string" &&
