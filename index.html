@@ -293,17 +293,15 @@
         <!-- PROJECT 1: SERVICE REMINDER ANALYTICS -->
         <article class="featured-project">
 
-          <div class="featured-image reminder-gallery">
-            <img
-              src="assets/projects/service-reminder-overview-2026.png"
-              alt="Reminder Overview dashboard showing 7,226 scheduling records, T-Care and regular reminder distribution, deadlines, and monthly trends"
-              loading="lazy"
-            />
-            <img
-              src="assets/projects/service-reminder-followup-2026.png"
-              alt="Follow-up Action List dashboard showing 751 targets, delivery verification, contact checks, and recommended actions"
-              loading="lazy"
-            />
+          <div class="featured-image reminder-gallery" aria-label="Service Reminder Analytics dashboard previews">
+            <button type="button" class="document-link reminder-preview" data-file="assets/projects/service-reminder-overview-2026.png" data-title="Service Reminder Analytics — Reminder Overview" aria-label="Enlarge Reminder Overview dashboard">
+              <img src="assets/projects/service-reminder-overview-2026.png" alt="Reminder Overview: 7,226 reminder records, T-Care and regular reminder distribution, deadlines, and monthly trends" loading="lazy" />
+              <span class="reminder-preview-label">View Reminder Overview ↗</span>
+            </button>
+            <button type="button" class="document-link reminder-preview" data-file="assets/projects/service-reminder-followup-2026.png" data-title="Service Reminder Analytics — Follow-up Action List" aria-label="Enlarge Follow-up Action List dashboard">
+              <img src="assets/projects/service-reminder-followup-2026.png" alt="Follow-up Action List: 751 December 2025 targets with delivery verification, contact checks, and recommended actions" loading="lazy" />
+              <span class="reminder-preview-label">View Follow-up Action List ↗</span>
+            </button>
           </div>
 
           <div class="featured-content">
@@ -614,11 +612,11 @@
               <h4>Auto2000 Kenjeran · Surabaya</h4>
 
               <p>
-                Developed service reminder analytics and customer
-                prioritization workflows using Python, business rules,
-                and XGBoost. Built Power BI dashboards and automated
-                reporting processes to support aftersales monitoring
-                and retention-oriented operations.
+                Developed an aftersales service reminder workflow integrating PKB/SO records,
+                operational scheduling rules, XGBoost scoring, and Power BI reporting.
+                Analyzed 751 reminder targets in a December 2025 test snapshot,
+                identifying 372 records requiring delivery verification and 9 requiring
+                contact-format review to support structured follow-up planning.
               </p>
 
               <button
@@ -1418,7 +1416,7 @@
     </div>
   </div>
 
-  <script src="./script.js?v=20261028-8"></script>
+  <script src="./script.js?v=20261109-final"></script>
 
 </body>
 </html>

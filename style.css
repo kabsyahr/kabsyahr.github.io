@@ -1559,3 +1559,41 @@ footer {
   line-height: 1.5;
   color: #627084;
 }
+
+
+/* Click-to-enlarge Power BI screenshots; uses the existing accessible document modal. */
+.reminder-gallery .reminder-preview {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+}
+.reminder-gallery .reminder-preview img {
+  transition: opacity 0.2s ease;
+}
+.reminder-gallery .reminder-preview:hover img,
+.reminder-gallery .reminder-preview:focus-visible img {
+  opacity: 0.85;
+}
+.reminder-gallery .reminder-preview:focus-visible {
+  outline: 3px solid #39cbe5;
+  outline-offset: 3px;
+}
+.reminder-preview-label {
+  display: block;
+  font-size: 0.79rem;
+  font-weight: 600;
+  margin: 5px 0 1px;
+  color: #39cbe5;
+  text-align: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reminder-gallery .reminder-preview img { transition: none; }
+}

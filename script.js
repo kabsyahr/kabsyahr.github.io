@@ -289,7 +289,10 @@ function createProjectCard(repo) {
     repo.description ||
     "Data and technology project available on GitHub.";
 
-  const language = repo.language || "Repository";
+  // Display a project-relevant technology summary instead of GitHub's single-language classification.
+  const language = repo.name === "service-reminder-analytics"
+    ? "Python · Power BI · Business Rules"
+    : (repo.language || "Repository");
 
   const repositoryURL =
     typeof repo.html_url === "string" &&
