@@ -1598,7 +1598,21 @@ footer {
   .reminder-gallery .reminder-preview img { transition: none; }
 }
 
-/* Retention thesis gallery follows the existing Service Reminder lightbox system. */
-.retention-gallery .reminder-preview img { max-height: 245px; object-fit: contain; }
-.featured-content .retention-finding { margin-top: 15px; color: #627084; }
-@media (max-width: 650px) { .retention-gallery .reminder-preview img { max-height: 215px; } }
+/* Retention gallery: align both research visuals with the established featured-project layout. */
+.retention-project { align-items: center; }
+.retention-gallery { width: 100%; min-width: 0; }
+.retention-gallery .reminder-preview { min-width: 0; }
+.retention-gallery .reminder-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 620;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 6px;
+  max-height: none;
+}
+.featured-content .retention-finding { margin-top: 14px; color: #627084; }
+@media (max-width: 650px) {
+  .retention-gallery .reminder-preview img { aspect-ratio: 1200 / 620; }
+}
