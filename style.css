@@ -1616,3 +1616,19 @@ footer {
 @media (max-width: 650px) {
   .retention-gallery .reminder-preview img { aspect-ratio: 1200 / 620; }
 }
+
+/* Service Reminder: match the two equally sized retention research panels.
+   Keep the entire Power BI screenshot visible without stretching or cropping. */
+.service-reminder-project { align-items: center; }
+.service-reminder-gallery { width: 100%; min-width: 0; }
+.service-reminder-gallery .reminder-preview { min-width: 0; }
+.service-reminder-gallery .reminder-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  aspect-ratio: 1200 / 620;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 6px;
+}
