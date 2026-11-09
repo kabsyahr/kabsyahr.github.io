@@ -74,7 +74,7 @@ const CATEGORY_LABELS = {
 
 const PROJECT_DESCRIPTIONS = {
   "service-reminder-analytics":
-    "Operational service reminder analytics combining business rules, XGBoost risk scoring, automation, and Power BI.",
+    "Auto2000 aftersales reminder analysis: PKB/SO integration, T-Care scheduling, 751 follow-up targets, delivery/contact verification, and Power BI actions.",
 
   "customer-retention-prediction":
     "Customer retention prediction for automotive aftersales services using Random Forest, XGBoost, CatBoost, and SHAP.",

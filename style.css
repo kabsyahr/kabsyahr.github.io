@@ -1534,3 +1534,28 @@ footer {
   }
 
 }
+
+/* Service Reminder Analytics: two final dashboard previews */
+.reminder-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.reminder-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 225px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+.featured-content .reminder-recommendation {
+  margin-top: 14px;
+  color: #627084;
+}
+.featured-content .reminder-disclaimer {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #627084;
+}

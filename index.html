@@ -290,47 +290,55 @@
 
         </div>
 
-        <!-- PROJECT 1 -->
+        <!-- PROJECT 1: SERVICE REMINDER ANALYTICS -->
         <article class="featured-project">
 
-          <div class="featured-image">
+          <div class="featured-image reminder-gallery">
             <img
-              src="assets/projects/service-reminder-analytics.png"
-              alt="Service Reminder Analytics dashboard"
+              src="assets/projects/service-reminder-overview-2026.png"
+              alt="Reminder Overview dashboard showing 7,226 scheduling records, T-Care and regular reminder distribution, deadlines, and monthly trends"
+              loading="lazy"
+            />
+            <img
+              src="assets/projects/service-reminder-followup-2026.png"
+              alt="Follow-up Action List dashboard showing 751 targets, delivery verification, contact checks, and recommended actions"
+              loading="lazy"
             />
           </div>
 
           <div class="featured-content">
-
-            <p class="project-category">
-              BUSINESS ANALYTICS · AUTOMATION
-            </p>
-
+            <p class="project-category">BUSINESS ANALYTICS · AUTOMATION</p>
             <h3>Service Reminder Analytics</h3>
 
             <p>
-              Operational aftersales analytics pipeline
-              developed during my Business Data Analyst
-              internship at Auto2000 Kenjeran, combining
-              service business rules, customer prioritization,
-              XGBoost risk scoring, automated targeting,
-              Google Sheets, and Power BI monitoring.
+              Developed an aftersales reminder workflow at Auto2000 Kenjeran
+              by integrating workshop service (PKB) and sales-order (SO) records.
+              Combined T-Care and regular-service scheduling rules with XGBoost
+              risk scoring and Power BI reporting to support operational review.
             </p>
 
             <div class="project-highlight">
-              <strong>Business Impact</strong>
-
+              <strong>Business Findings · December 2025 Test Snapshot</strong>
               <span>
-                Supports customer prioritization and
-                retention-oriented service reminder operations.
+                Segmented 751 reminder targets into 373 for follow-up preparation,
+                369 requiring delivery verification first, and 9 requiring contact
+                review first. Three contact-review targets also needed delivery
+                verification, revealing overlapping data-quality checks.
               </span>
             </div>
 
+            <p class="reminder-recommendation">
+              <strong>Recommended action:</strong> Verify delivery dates and T-Care
+              eligibility, resolve contact-format issues, then review the
+              follow-up queue before customer outreach.
+            </p>
+            <p class="reminder-disclaimer">
+              Prototype results from an internship test snapshot; no measured
+              improvement in retention or completed bookings is claimed.
+            </p>
+
             <div class="tags">
-              <span>Python</span>
-              <span>Power BI</span>
-              <span>XGBoost</span>
-              <span>Google Sheets</span>
+              <span>Python</span><span>Power BI</span><span>XGBoost</span><span>Google Sheets</span>
             </div>
 
             <a
@@ -338,10 +346,7 @@
               target="_blank"
               rel="noopener noreferrer"
               class="project-link"
-            >
-              View Repository →
-            </a>
-
+            >View Repository →</a>
           </div>
         </article>
 
